@@ -2,16 +2,9 @@ import React, { ChangeEvent, useState } from "react";
 import "./App.css";
 import { Checklist } from "./Components/Checklist/Checklist";
 import { Store } from "./redux/store";
+import { checklistReducer } from "./state/checklistReducer";
 
-const store = new Store(
-  {},
-  {
-    checklist: {
-      name: "React training",
-      items: [{ label: "item1", completed: false }],
-    },
-  }
-);
+const store = new Store({ checklist: checklistReducer });
 console.log(store.value);
 
 function App() {
@@ -32,7 +25,7 @@ function App() {
 
   return (
     <div>
-      <Checklist name="React Redux training"></Checklist>
+      <Checklist name="React Redux training" items={[]}></Checklist>
       <input type="text" onChange={(e) => handleChange(e)} value={newItem} />
       <input type="button" value="Add item" onClick={(e) => addItem()}></input>
     </div>

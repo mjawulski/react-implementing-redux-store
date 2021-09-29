@@ -1,6 +1,6 @@
 export interface Checklist {
   name: string;
-  items?: ChecklistItem;
+  items: ChecklistItem[];
 }
 
 export interface ChecklistItem {

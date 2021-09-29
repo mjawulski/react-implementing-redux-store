@@ -7,7 +7,7 @@ export class Store {
 
   constructor(reducers = {}, initialState = {}) {
     this.reducers = reducers;
-    this.state = initialState;
+    this.state = this.reduce(initialState, {});
     this.subscribers = [];
   }
 
@@ -17,13 +17,18 @@ export class Store {
 
   dispatch(action: Action) {
     console.log(action);
-    this.state = {
-      ...this.state,
-      checklist: {
-        ...this.state.checklist,
-        items: [...this.state.checklist.items, action.payload],
-      },
-    };
+    this.state = this.reduce(this.state, action);
     console.log(this.value);
+  }
+
+  reduce(state: any, action: Action) {
+    const newState: { [key: string]: any } = {};
+    for (const prop in this.reducers) {
+      if (Object.prototype.hasOwnProperty.call(this.reducers, prop)) {
+        const reducer = this.reducers[prop];
+        newState[prop] = reducer(state[prop], action);
+      }
+    }
+    return newState;
   }
 }
