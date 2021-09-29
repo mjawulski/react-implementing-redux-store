@@ -1,6 +1,18 @@
 import React, { ChangeEvent, useState } from "react";
 import "./App.css";
 import { Checklist } from "./Components/Checklist/Checklist";
+import { Store } from "./redux/store";
+
+const store = new Store(
+  {},
+  {
+    checklist: {
+      name: "React training",
+      items: [{ label: "item1", completed: false }],
+    },
+  }
+);
+console.log(store.value);
 
 function App() {
   const [newItem, setNewItem] = useState("");
@@ -10,7 +22,11 @@ function App() {
   }
 
   function addItem() {
-    console.log(newItem);
+    const payload = { label: newItem, completed: false };
+    store.dispatch({
+      type: "ADD_ITEM",
+      payload,
+    });
     setNewItem("");
   }
 
