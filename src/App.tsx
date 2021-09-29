@@ -1,24 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { ChangeEvent, useState } from "react";
+import "./App.css";
+import { Checklist } from "./Components/Checklist/Checklist";
 
 function App() {
+  const [newItem, setNewItem] = useState("");
+
+  function handleChange(e: ChangeEvent<HTMLInputElement>): void {
+    setNewItem(e.target.value);
+  }
+
+  function addItem() {
+    console.log(newItem);
+    setNewItem("");
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Checklist name="React Redux training"></Checklist>
+      <input type="text" onChange={(e) => handleChange(e)} value={newItem} />
+      <input type="button" value="Add item" onClick={(e) => addItem()}></input>
     </div>
   );
 }
