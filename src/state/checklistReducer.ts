@@ -3,7 +3,12 @@ import { Action } from "../redux/action.model";
 
 const initialState = {
   name: "React training",
-  items: [{ label: "item1", isCompleted: false }],
+  items: [
+    { label: "item1", isCompleted: false },
+    { label: "item1", isCompleted: false },
+    { label: "item1", isCompleted: false },
+    { label: "item1", isCompleted: false },
+  ],
 };
 
 export function checklistReducer(
